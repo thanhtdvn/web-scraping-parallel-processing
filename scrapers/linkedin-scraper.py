@@ -9,11 +9,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
-
-# def get_driver():
-#     driver = webdriver.Chrome()
-#     return driver
-
 def get_driver():
     # initialize options
     options = webdriver.ChromeOptions()
@@ -25,18 +20,13 @@ def get_driver():
     driver = webdriver.Chrome(chrome_options=options, executable_path=chrome_driver)
     return driver
 
-
 def connect_to_base(browser, page_number):
-    base_url = f'https://news.ycombinator.com/news?p={page_number}'
+    base_url = f'https://www.linkedin.com/'
     connection_attempts = 0
     while connection_attempts < 3:
         try:
             browser.get(base_url)
-            # wait for table element with id = 'hnmain' to load
-            # before returning True
-            WebDriverWait(browser, 5).until(
-                EC.presence_of_element_located((By.ID, 'hnmain'))
-            )
+            time.sleep(3)
             return True
         except Exception as ex:
             connection_attempts += 1
@@ -44,6 +34,21 @@ def connect_to_base(browser, page_number):
             print(f'Attempt #{connection_attempts}.')
     return False
 
+def connect_to_profile_page(browser, url):
+    connection_attempts = 0
+    while connection_attempts < 3:
+        try:
+            browser.get(url)
+            WebDriverWait(browser, 10).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'top-card-layout__cta top-card-layout__cta--primary'))
+            )
+            if()
+            return True
+        except Exception as ex:
+            connection_attempts += 1
+            print(f'Error connecting to {base_url}.')
+            print(f'Attempt #{connection_attempts}.')
+    return False
 
 def parse_html(html):
     # create soup object
