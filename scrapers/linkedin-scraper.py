@@ -13,7 +13,7 @@ def get_driver():
     # initialize options
     options = webdriver.ChromeOptions()
     # pass in headless argument to options
-    options.add_argument('--headless')
+    # options.add_argument('--headless')
 
     # initialize driver
     chrome_driver = "C:\\_workspace\\chromedriver.exe"
@@ -26,7 +26,7 @@ def connect_to_base(browser, page_number):
     while connection_attempts < 3:
         try:
             browser.get(base_url)
-            time.sleep(3)
+            sleep(3)
             return True
         except Exception as ex:
             connection_attempts += 1
@@ -42,11 +42,11 @@ def connect_to_profile_page(browser, url):
             WebDriverWait(browser, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'top-card-layout__cta top-card-layout__cta--primary'))
             )
-            if()
+
             return True
         except Exception as ex:
             connection_attempts += 1
-            print(f'Error connecting to {base_url}.')
+            print(f'Error connecting to {url}.')
             print(f'Attempt #{connection_attempts}.')
     return False
 

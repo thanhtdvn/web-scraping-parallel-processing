@@ -6,6 +6,7 @@ from selenium import webdriver
 
 from .pages.login import LoginPage
 from .pages.profile import ProfilePage
+from .pages.search import SearchPage
 
 def get_driver():
     # initialize options
@@ -27,4 +28,7 @@ class Page:
 
     def profile(self):
         return ProfilePage(self.browser)
+
+    def search(self):
+        return SearchPage(self.browser)
     

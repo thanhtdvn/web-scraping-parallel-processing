@@ -1,3 +1,4 @@
+from time import sleep, time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,7 +12,7 @@ class LoginPage:
     
     def connect(self, url):
         connection_attempts = 0
-        wait = WebDriverWait(self.browser, 10)
+        wait = WebDriverWait(self.browser, 120)
         while connection_attempts < 1:
             try:
                 self.browser.get(url)
@@ -22,7 +23,9 @@ class LoginPage:
                 submit = wait.until(EC.presence_of_element_located((By.XPATH, '//form[@class="login__form"]//button[@type="submit"]')))
                 print ('exits submit button')
                 username.send_keys('truongducthanh88@gmail.com')
+                sleep(1)
                 password.send_keys('96543515@vn')
+                sleep(3)
                 submit.click()
 
                 #wait.until(EC.presence_of_element_located((By.ID), 'profile-nav-item'))
@@ -32,3 +35,4 @@ class LoginPage:
                 print(f'Error connecting to {url}.')
                 print(f'Attempt #{connection_attempts}.')
         return False
+ 
